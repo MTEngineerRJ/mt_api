@@ -13,5 +13,6 @@ router.get("/pendingLeads", leadsController.pendingLeads);
 router.get("/historyLeads", leadsController.historyLeads);
 
 router.get("/surveyDetails", surveyController.surveyDetails);
+router.post("/updateSurveyDetails", surveyController.updateSurveyDetails);
 
 module.exports = router;
