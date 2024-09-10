@@ -27,4 +27,4 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: ls
-    - run: pm2 restart app.js
+    - run: sudo pm2 restart app.js
