@@ -66,7 +66,7 @@ const uploadDocument = (req, res) => {
   console.log(FileName);
 
 
-  const query = `INSERT INTO reportimage(LeadID, FileName, FileUrl, SeqNo) SELECT "${LeadID}", "${FileName}", "${FileUrl}", (COUNT(*)+1) FROM reportimage WHERE LeadID=${LeadID}`;
+  const query = `INSERT INTO ReportImage(LeadID, FileName, FileUrl, SeqNo) SELECT "${LeadID}", "${FileName}", "${FileUrl}", (COUNT(*)+1) FROM ReportImage WHERE LeadID=${LeadID}`;
 
   db.query(query, (err, result2) => {
     if (err) {

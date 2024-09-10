@@ -68,51 +68,51 @@ const updateSurveyDetails = (req, res) => {
       .json({ status: false, data: null, message: "survey id can't be blank" });
   }
 
-  const updateClaimDetails = `UPDATE claimdetails 
+  const updateClaimDetails = `UPDATE ClaimDetails 
   LEFT JOIN
-  insureddetails ON claimdetails.LeadID = insureddetails.LeadID
+  InsuredDetails ON ClaimDetails.LeadID = InsuredDetails.LeadID
       LEFT JOIN
-  driverdetails ON claimdetails.LeadID = driverdetails.LeadID
+  DriverDetails ON ClaimDetails.LeadID = DriverDetails.LeadID
       LEFT JOIN
-  vehicledetails ON claimdetails.LeadID = vehicledetails.LeadID
+  VehicleDetails ON ClaimDetails.LeadID = VehicleDetails.LeadID
       LEFT JOIN
-  claimstatus ON claimdetails.LeadID = claimstatus.LeadID
+  ClaimStatus ON ClaimDetails.LeadID = ClaimStatus.LeadID
       LEFT JOIN
-  accidentdetails ON claimdetails.LeadID = accidentdetails.LeadID
+  AccidentDetails ON ClaimDetails.LeadID = AccidentDetails.LeadID
   SET
-  claimdetails.ReferenceNo='${ReferenceNo}',
-  claimdetails.PolicyNumber='${PolicyNumber}',
-  claimdetails.PolicyPeriodStart='${PolicyPeriodStart}',
-  claimdetails.PolicyPeriodEnd='${PolicyPeriodEnd}',
-  claimdetails.ClaimNumber='${ClaimNumber}',
-  claimdetails.IDV='${IDV}',
-  insureddetails.InsuredAddress='${InsuredAddress}',
-  insureddetails.InsuredName='${InsuredName}',
-  insureddetails.InsuredMailAddress='${InsuredMailAddress}',
-  insureddetails.InsuredMobileNo1='${InsuredMobileNo}',
-  driverdetails.DriverName='${DriverName}',
-  driverdetails.LicenseNumber='${LicenseNumber}',
-  driverdetails.DateOfIssue='${DateOfIssue}',
-  driverdetails.IssuingAuthority='${IssuingAuthority}',
-  driverdetails.LicenseType='${LicenseType}',
-  driverdetails.ValidUpto='${ValidUpto}',
-  vehicledetails.RegisteredNumber='${RegisteredNumber}',
-  vehicledetails.ChassisNumber='${ChassisNumber}',
-  vehicledetails.EngineNumber='${EngineNumber}',
-  vehicledetails.MakerDesc='${MakerDesc}',
-  vehicledetails.MakerModel='${MakerModel}',
-  vehicledetails.TypeOfBody='${TypeOfBody}',
-  vehicledetails.VehicleClassDescription='${VehicleClassDescription}',
-  vehicledetails.PucNumber='${PucNumber}',
-  vehicledetails.PucValidUntil='${PucValidUntil}',
-  vehicledetails.SeatingCapacity='${SeatingCapacity}',
-  vehicledetails.DateOfRegistration='${DateOfRegistration}',
-  accidentdetails.CauseOfAccident='${CauseOfAccident}',
-  accidentdetails.DateOfAccident='${DateOfAccident}',
-  accidentdetails.TimeOfAccident='${TimeOfAccident}',
-  accidentdetails.PlaceOfSurvey='${PlaceOfSurvey}'  
+  ClaimDetails.ReferenceNo='${ReferenceNo}',
+  ClaimDetails.PolicyNumber='${PolicyNumber}',
+  ClaimDetails.PolicyPeriodStart='${PolicyPeriodStart}',
+  ClaimDetails.PolicyPeriodEnd='${PolicyPeriodEnd}',
+  ClaimDetails.ClaimNumber='${ClaimNumber}',
+  ClaimDetails.IDV='${IDV}',
+  InsuredDetails.InsuredAddress='${InsuredAddress}',
+  InsuredDetails.InsuredName='${InsuredName}',
+  InsuredDetails.InsuredMailAddress='${InsuredMailAddress}',
+  InsuredDetails.InsuredMobileNo1='${InsuredMobileNo}',
+  DriverDetails.DriverName='${DriverName}',
+  DriverDetails.LicenseNumber='${LicenseNumber}',
+  DriverDetails.DateOfIssue='${DateOfIssue}',
+  DriverDetails.IssuingAuthority='${IssuingAuthority}',
+  DriverDetails.LicenseType='${LicenseType}',
+  DriverDetails.ValidUpto='${ValidUpto}',
+  VehicleDetails.RegisteredNumber='${RegisteredNumber}',
+  VehicleDetails.ChassisNumber='${ChassisNumber}',
+  VehicleDetails.EngineNumber='${EngineNumber}',
+  VehicleDetails.MakerDesc='${MakerDesc}',
+  VehicleDetails.MakerModel='${MakerModel}',
+  VehicleDetails.TypeOfBody='${TypeOfBody}',
+  VehicleDetails.VehicleClassDescription='${VehicleClassDescription}',
+  VehicleDetails.PucNumber='${PucNumber}',
+  VehicleDetails.PucValidUntil='${PucValidUntil}',
+  VehicleDetails.SeatingCapacity='${SeatingCapacity}',
+  VehicleDetails.DateOfRegistration='${DateOfRegistration}',
+  AccidentDetails.CauseOfAccident='${CauseOfAccident}',
+  AccidentDetails.DateOfAccident='${DateOfAccident}',
+  AccidentDetails.TimeOfAccident='${TimeOfAccident}',
+  AccidentDetails.PlaceOfSurvey='${PlaceOfSurvey}'  
 WHERE
-  claimdetails.LeadID = ${LeadID}`;
+  ClaimDetails.LeadID = ${LeadID}`;
 
  db.query(updateClaimDetails, (err, result2) => {
     if (err) {
@@ -147,54 +147,54 @@ const surveyDetails = (req, res) => {
   }
 
   const sql = `SELECT 
-    claimdetails.LeadID,
-    IFNULL(claimdetails.ReferenceNo, '') AS ReferenceNo,
-    IFNULL(claimdetails.PolicyNumber, '') AS PolicyNumber,
-    IFNULL(claimdetails.PolicyPeriodStart, '') AS PolicyPeriodStart,
-    IFNULL(claimdetails.PolicyPeriodEnd, '') AS PolicyPeriodEnd,
-    IFNULL(claimdetails.ClaimNumber, '') AS ClaimNumber,
-    IFNULL(claimdetails.IDV, 0.0) AS IDV,
-    IFNULL(insureddetails.InsuredAddress, '') AS InsuredAddress,
-    IFNULL(insureddetails.InsuredName, '') AS InsuredName,
-    IFNULL(insureddetails.InsuredMailAddress, '') AS InsuredMailAddress,
-    IFNULL(insureddetails.InsuredMobileNo1, '') AS InsuredMobileNo,
-    IFNULL(driverdetails.DriverName, '') AS DriverName,
-    IFNULL(driverdetails.LicenseNumber, '') AS LicenseNumber,
-    IFNULL(driverdetails.DateOfIssue, '') AS DateOfIssue,
-    IFNULL(driverdetails.IssuingAuthority, '') AS IssuingAuthority,
-    IFNULL(driverdetails.LicenseType, '') AS LicenseType,
-    IFNULL(driverdetails.ValidUpto, '') AS ValidUpto,
-    IFNULL(vehicledetails.RegisteredNumber, '') AS RegisteredNumber,
-    IFNULL(vehicledetails.ChassisNumber, '') AS ChassisNumber,
-    IFNULL(vehicledetails.EngineNumber, '') AS EngineNumber,
-    IFNULL(vehicledetails.MakerDesc, '') AS MakerDesc,
-    IFNULL(vehicledetails.MakerModel, '') AS MakerModel,
-    IFNULL(vehicledetails.TypeOfBody, '') AS TypeOfBody,
-    IFNULL(vehicledetails.VehicleClassDescription, '') AS VehicleClassDescription,
-    IFNULL(vehicledetails.PucNumber, '') AS PucNumber,
-    IFNULL(vehicledetails.PucValidUntil, '') AS PucValidUntil,
-    IFNULL(vehicledetails.SeatingCapacity, 0) AS SeatingCapacity,
-    IFNULL(vehicledetails.DateOfRegistration, '') AS DateOfRegistration,
-    IFNULL(accidentdetails.CauseOfAccident, '') AS CauseOfAccident,
-    IFNULL(accidentdetails.DateOfAccident, '') AS DateOfAccident,
-    IFNULL(accidentdetails.TimeOfAccident, '') AS TimeOfAccident,
-    IFNULL(accidentdetails.PlaceOfSurvey, '') AS PlaceOfSurvey
+    ClaimDetails.LeadID,
+    IFNULL(ClaimDetails.ReferenceNo, '') AS ReferenceNo,
+    IFNULL(ClaimDetails.PolicyNumber, '') AS PolicyNumber,
+    IFNULL(ClaimDetails.PolicyPeriodStart, '') AS PolicyPeriodStart,
+    IFNULL(ClaimDetails.PolicyPeriodEnd, '') AS PolicyPeriodEnd,
+    IFNULL(ClaimDetails.ClaimNumber, '') AS ClaimNumber,
+    IFNULL(ClaimDetails.IDV, 0.0) AS IDV,
+    IFNULL(InsuredDetails.InsuredAddress, '') AS InsuredAddress,
+    IFNULL(InsuredDetails.InsuredName, '') AS InsuredName,
+    IFNULL(InsuredDetails.InsuredMailAddress, '') AS InsuredMailAddress,
+    IFNULL(InsuredDetails.InsuredMobileNo1, '') AS InsuredMobileNo,
+    IFNULL(DriverDetails.DriverName, '') AS DriverName,
+    IFNULL(DriverDetails.LicenseNumber, '') AS LicenseNumber,
+    IFNULL(DriverDetails.DateOfIssue, '') AS DateOfIssue,
+    IFNULL(DriverDetails.IssuingAuthority, '') AS IssuingAuthority,
+    IFNULL(DriverDetails.LicenseType, '') AS LicenseType,
+    IFNULL(DriverDetails.ValidUpto, '') AS ValidUpto,
+    IFNULL(VehicleDetails.RegisteredNumber, '') AS RegisteredNumber,
+    IFNULL(VehicleDetails.ChassisNumber, '') AS ChassisNumber,
+    IFNULL(VehicleDetails.EngineNumber, '') AS EngineNumber,
+    IFNULL(VehicleDetails.MakerDesc, '') AS MakerDesc,
+    IFNULL(VehicleDetails.MakerModel, '') AS MakerModel,
+    IFNULL(VehicleDetails.TypeOfBody, '') AS TypeOfBody,
+    IFNULL(VehicleDetails.VehicleClassDescription, '') AS VehicleClassDescription,
+    IFNULL(VehicleDetails.PucNumber, '') AS PucNumber,
+    IFNULL(VehicleDetails.PucValidUntil, '') AS PucValidUntil,
+    IFNULL(VehicleDetails.SeatingCapacity, 0) AS SeatingCapacity,
+    IFNULL(VehicleDetails.DateOfRegistration, '') AS DateOfRegistration,
+    IFNULL(AccidentDetails.CauseOfAccident, '') AS CauseOfAccident,
+    IFNULL(AccidentDetails.DateOfAccident, '') AS DateOfAccident,
+    IFNULL(AccidentDetails.TimeOfAccident, '') AS TimeOfAccident,
+    IFNULL(AccidentDetails.PlaceOfSurvey, '') AS PlaceOfSurvey
 FROM
-    claimdetails
+    ClaimDetails
         LEFT JOIN
-    insureddetails ON claimdetails.LeadID = insureddetails.LeadID
+    InsuredDetails ON ClaimDetails.LeadID = InsuredDetails.LeadID
         LEFT JOIN
-    driverdetails ON claimdetails.LeadID = driverdetails.LeadID
+    DriverDetails ON ClaimDetails.LeadID = DriverDetails.LeadID
         LEFT JOIN
-    vehicledetails ON claimdetails.LeadID = vehicledetails.LeadID
+    VehicleDetails ON ClaimDetails.LeadID = VehicleDetails.LeadID
         LEFT JOIN
-    claimstatus ON claimdetails.LeadID = claimstatus.LeadID
+    ClaimStatus ON ClaimDetails.LeadID = ClaimStatus.LeadID
         LEFT JOIN
-    accidentdetails ON claimdetails.LeadID = accidentdetails.LeadID
+    AccidentDetails ON ClaimDetails.LeadID = AccidentDetails.LeadID
 WHERE
-    claimdetails.LeadID = ?
-        AND claimdetails.IsActive = TRUE
-        AND claimdetails.IsClaimCompleted = FALSE`;
+    ClaimDetails.LeadID = ?
+        AND ClaimDetails.IsActive = TRUE
+        AND ClaimDetails.IsClaimCompleted = FALSE`;
 
   db.query(sql, [survey_id], (err, result) => {
     if (err) {

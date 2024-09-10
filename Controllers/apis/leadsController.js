@@ -1,7 +1,7 @@
 
 const db = require("../../Config/dbConfig");
 
-const sql = "SELECT claimdetails.LeadID, claimdetails.ReferenceNo, claimdetails.SurveyType, claimdetails.PolicyNumber, insureddetails.InsuredAddress, insureddetails.InsuredName,vehicledetails.RegisteredNumber, claimdetails.PolicyType  FROM claimdetails JOIN insureddetails ON claimdetails.LeadID = insureddetails.LeadID JOIN vehicledetails ON claimdetails.LeadID =  vehicledetails.LeadID JOIN claimstatus ON claimdetails.LeadID =  claimstatus.LeadID WHERE AssignedToId = ? AND claimstatus.Status BETWEEN ? AND ? AND  claimdetails.IsActive = true AND claimdetails.IsClaimCompleted = false";
+const sql = "SELECT ClaimDetails.LeadID, ClaimDetails.ReferenceNo, ClaimDetails.SurveyType, ClaimDetails.PolicyNumber, InsuredDetails.InsuredAddress, InsuredDetails.InsuredName,VehicleDetails.RegisteredNumber, ClaimDetails.PolicyType  FROM ClaimDetails JOIN InsuredDetails ON ClaimDetails.LeadID = InsuredDetails.LeadID JOIN VehicleDetails ON ClaimDetails.LeadID =  VehicleDetails.LeadID JOIN ClaimStatus ON ClaimDetails.LeadID =  ClaimStatus.LeadID WHERE AssignedToId = ? AND ClaimStatus.Status BETWEEN ? AND ? AND  ClaimDetails.IsActive = true AND ClaimDetails.IsClaimCompleted = false";
 
 const pendingLeads = (req, res) => {
   console.log(req.headers)
