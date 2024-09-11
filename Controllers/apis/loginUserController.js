@@ -9,7 +9,7 @@ const loginUser = (req, res) => {
   if (!Username || !Password) {
     return res
       .status(400)
-      .json({ status: false, data: null, message: "Username and password are required" });
+      .json({ status: false, data: null, message: "Required Username and Password" });
   }
 
   const sql = "SELECT * FROM CMSDB.Login WHERE Username = ? AND Password = ?";
@@ -21,11 +21,11 @@ const loginUser = (req, res) => {
     if (result.length === 1) {
       // Authentication successful
       return res.status(200).json({
-        status: true, data: result[0], message: "Login successful"
+        status: true, data: result[0], message: "Login Successful"
       });
     } else {
       // Authentication failed
-      return res.status(401).json({ status: false, data: null, message: "Invalid credentials" });
+      return res.status(401).json({ status: false, data: null, message: "Invalid Credentials" });
     }
   });
 };
