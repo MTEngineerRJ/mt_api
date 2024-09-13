@@ -25,7 +25,8 @@ const sql = `SELECT DISTINCT
                 INNER JOIN GarageDetails GD ON CD.LeadId = GD.LeadId
                 INNER JOIN ClaimStatus CS ON CD.LeadId = CS.LeadId
             WHERE 
-                CD.Region = ?`;
+                CD.Region = ?
+            LIMIT ?, 20`;
 
 const pendingLeads = (req, res) => {
   const Region = req.query.Region
@@ -41,7 +42,7 @@ const pendingLeads = (req, res) => {
   //   CalimStatus || null,
   // ];
 
-  db.query(sql, Region, (err, result) => {
+  db.query(sql, [Region], (err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).send("Internal Server Error");
@@ -85,10 +86,11 @@ const historyLeads = (req, res) => {
 
 const getAllSurvey = (req, res) => {
   const Region = req.query.Region
+  const offset = parseInt(req.query.offset)
   if (!Region) {
     return res.json({ status: false, data: null, message: "invalid region" });
   }
-  db.query(sql, [Region], (err, result) => {
+  db.query(sql, [Region, offset], (err, result) => {
     if (err) {
       console.error(err);
       return res.json({ status: false, data: null, message: "Internal Server Error" });
