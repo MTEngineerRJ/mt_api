@@ -13,6 +13,8 @@ router.post("/loginUser", loginController.loginUser);
 router.get("/pendingLeads", leadsController.pendingLeads);
 router.get("/historyLeads", leadsController.historyLeads);
 
+router.get("/getAllSurvey",leadsController.getAllSurvey);
+
 router.get("/surveyDetails", surveyController.surveyDetails);
 router.post("/updateSurveyDetails", surveyController.updateSurveyDetails);
 
