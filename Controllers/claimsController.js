@@ -2,7 +2,7 @@ const db = require("../Config/dbConfig");
 
 const getAllClaims = (req, res) => {
   const Region1 = req.query.Region
-  const CalimStatus = 5
+  const CalimStatus = 1
 
   const sql = "CALL GetPolicyInfoByRegions(?, ?, ?, ?, ?, ?, ?, ?)";
 
