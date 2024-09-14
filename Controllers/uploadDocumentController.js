@@ -1,4 +1,4 @@
-const db = require("../../Config/dbConfig");
+const db = require("../Config/dbConfig");
 
 const getDocuments = (req, res) => {
   const LeadId = req.query.LeadId;

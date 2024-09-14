@@ -18,7 +18,6 @@ app.get('/', (req, res) => {
 
 app.use('/privacy_policy',express.static(__dirname+'/privacy_policy.html'));
 
-
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

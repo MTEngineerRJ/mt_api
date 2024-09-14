@@ -1,5 +1,5 @@
 
-const db = require("../../Config/dbConfig");
+const db = require("../Config/dbConfig");
 
 
 const updateSurveyDetails = (req, res) => {

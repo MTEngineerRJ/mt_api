@@ -2,10 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 
-const loginController = require("../Controllers/apis/loginUserController");
-const leadsController = require("../Controllers/apis/leadsController")
-const surveyController = require("../Controllers/apis/surveyController")
-const uploadDocumentController = require("../Controllers/apis/uploadDocumentController")
+const loginController = require("../Controllers/loginUserController");
+const leadsController = require("../Controllers/leadsController")
+const surveyController = require("../Controllers/surveyController")
+const uploadDocumentController = require("../Controllers/uploadDocumentController")
 
 
 router.post("/loginUser", loginController.loginUser);
