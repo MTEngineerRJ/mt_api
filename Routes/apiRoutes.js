@@ -13,9 +13,10 @@ const uploadDocumentController = require("../Controllers/uploadDocumentControlle
 router.post("/loginUser", loginController.loginUser);
 router.get("/getAllClaims",claimsController.getAllClaims);
 
-router.get("/surveyDetails", surveyController.surveyDetails);
-router.post("/updateSurveyDetails", surveyController.updateSurveyDetails);
+// router.get("/surveyDetails", surveyController.surveyDetails);
+// router.post("/updateSurveyDetails", surveyController.updateSurveyDetails);
 
 router.post("/uploadDocument", uploadDocumentController.uploadDocument)
+router.get("/getDocuments", uploadDocumentController.getDocuments)
 
 module.exports = router;
