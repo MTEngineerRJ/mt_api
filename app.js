@@ -10,7 +10,7 @@ var path = require("path");
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-app.use("/apis",apiRoutes);
+// app.use("/apis",apiRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello, this is your Express server!');
