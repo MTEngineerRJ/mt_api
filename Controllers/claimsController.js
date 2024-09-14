@@ -29,4 +29,4 @@ const getAllClaims = (req, res) => {
   });
 };
 
-module.exports = { pendingLeads, historyLeads, getAllClaims };
+module.exports = { getAllClaims };
