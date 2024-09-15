@@ -3,7 +3,7 @@ const db = require("../Config/dbConfig");
 const getComments = (req, res) => {
   const LeadID = req.query.LeadID
 
-  const sql = "SELECT LeadID, Comment, AddedDate, UserName as Username, modifiedtimestamp FROM comments WHERE LeadID = ? ORDER BY AddedDate DESC";
+  const sql = "SELECT LeadID, Comment, AddedDate, UserName as Username, modifiedtimestamp FROM comments WHERE LeadID = ? ORDER BY AddedDate ASC";
 
   if (!LeadID) {
     return res.json({ status: false, data: null, message: "lead id can't be blank" });
