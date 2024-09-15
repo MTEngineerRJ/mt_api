@@ -2,7 +2,7 @@ const db = require("../Config/dbConfig");
 
 const getDocuments = (req, res) => {
   const LeadId = req.query.LeadId;
-  const sql = "SELECT DocumentName, Photo1 as doc_url, Attribute1 as file_name, Photo1Latitude as latitude, Photo1Longitude as longitude, Photo1Timestamp as timestamp FROM DocumentList WHERE LeadID = ?;";
+  const sql = "SELECT LeadID, DocumentName, Photo1 as FileUrl, Attribute1 as FileName, Photo1Latitude as Latitude, Photo1Longitude as Longitude, Photo1Timestamp as Timestamp FROM DocumentList WHERE LeadID = ?;";
 
   if (!LeadId) {
     return res.json({ status: false, data: null, message: "invalid lead id" });
@@ -14,15 +14,16 @@ const getDocuments = (req, res) => {
     }
     const groupedResult = {};
     result.forEach(doc => {
-      const { DocumentName, doc_url, file_name, latitude, longitude, timestamp } = doc;
+      const { LeadID, DocumentName, FileUrl, FileName, Latitude, Longitude, Timestamp } = doc;
       if (!groupedResult[DocumentName]) {
         groupedResult[DocumentName] = {
+          LeadID,
           DocumentName,
-          DocumentDetails: []
+          DocumentList: []
         };
       }
       //console.log('result',result);
-      groupedResult[DocumentName].DocumentDetails.push({ doc_url, file_name, latitude, longitude, timestamp });
+      groupedResult[DocumentName].DocumentList.push({ FileUrl, FileName, Latitude, Longitude, Timestamp });
     });
 
     // Convert the grouped result to an array
@@ -37,42 +38,42 @@ const getDocuments = (req, res) => {
 };
 
 const uploadDocument = (req, res) => {
-  const { token } = req.headers
+  const { LeadID, DocumentName, FileUrl, FileName, Latitude, Longitude, Timestamp } = req.body;
+  const file = data;
 
-  const {
-    LeadID,
-    FileName,
-    FileUrl
-  } = req.body;
-
-  if (!token) {
+  if (!LeadID || !DocumentName) {
     return res
-      .status(400)
-      .json({ status: false, data: null, message: "invalid access token" });
+      .status(500)
+      .json({ status: false, data: null, message: "lead id can't be blank" });
   }
+  const insertUploadDetails = `
+      INSERT INTO DocumentList (
+        LeadId,
+        DocumentName,
+        Photo1,
+        Attribute1,
+        Photo1Latitude,
+        Photo1Longitude,
+        Photo1Timestamp
+      ) VALUES (
+        '${LeadID}',
+        '${DocumentName}',
+        '${FileUrl}',
+        '${FileName}',
+        '${Latitude}',
+        '${Longitude}',
+        '${Timestamp}'
+      );
+    `;
 
-  if (!LeadID) {
-    return res
-      .status(400)
-      .json({ status: false, data: null, message: "survey id can't be blank" });
-  }
-
-  console.log(FileName);
-
-
-  const query = `INSERT INTO ReportImage(LeadID, FileName, FileUrl, SeqNo) SELECT "${LeadID}", "${FileName}", "${FileUrl}", (COUNT(*)+1) FROM ReportImage WHERE LeadID=${LeadID}`;
-
-  db.query(query, (err, result2) => {
-    if (err) {
-      console.error(err);
+  db.query(insertUploadDetails, (error, results) => {
+    if (error) {
       return res.status(500).json({ status: false, data: null, message: "Internal Server Error" });
-    }
-    if (result2.affectedRows == 0) {
-      return res.status(400).json({ status: false, data: result2, message: "survey not found!!" })
     } else {
-      res.status(200).json({ status: true, data: "Successfully Updated!!", message: "Successfully Updated!!" })
+      return res.status(200).json({ status: true, data: "Successfully Updated!!", message: "Successfully Updated!!" })
     }
   });
+
 };
 
 module.exports = {
