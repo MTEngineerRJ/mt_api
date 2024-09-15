@@ -25,7 +25,7 @@ const getAllClaims = (req, res) => {
       console.error(err);
       return res.json({ status: false, data: null, message: "Internal Server Error" });
     }
-    return res.json({ status: true, data: result[0], message: "survey found" });
+    return res.json({ status: true, data: result[0].reverse(), message: "survey found" });
   });
 };
 
