@@ -39,7 +39,6 @@ const getDocuments = (req, res) => {
 
 const uploadDocument = (req, res) => {
   const { LeadID, DocumentName, FileUrl, FileName, Latitude, Longitude, Timestamp } = req.body;
-  const file = data;
 
   if (!LeadID || !DocumentName) {
     return res
