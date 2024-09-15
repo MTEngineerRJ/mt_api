@@ -2,21 +2,16 @@ const express = require('express');
 
 const router = express.Router();
 
-const loginController = require("../Controllers/loginUserController");
 const claimsController = require("../Controllers/claimsController")
-
-
-const surveyController = require("../Controllers/surveyController")
+const commentController = require("../Controllers/commentController")
+const loginController = require("../Controllers/loginUserController");
 const uploadDocumentController = require("../Controllers/uploadDocumentController")
 
-
-router.post("/loginUser", loginController.loginUser);
-router.get("/getAllClaims",claimsController.getAllClaims);
-
-// router.get("/surveyDetails", surveyController.surveyDetails);
-// router.post("/updateSurveyDetails", surveyController.updateSurveyDetails);
-
-router.post("/uploadDocument", uploadDocumentController.uploadDocument)
+router.post("/addComment", commentController.addComment);
+router.get("/getAllClaims", claimsController.getAllClaims);
+router.get("/getComments", commentController.getComments);
 router.get("/getDocuments", uploadDocumentController.getDocuments)
+router.post("/loginUser", loginController.loginUser);
+router.post("/uploadDocument", uploadDocumentController.uploadDocument)
 
 module.exports = router;

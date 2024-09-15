@@ -41,9 +41,7 @@ const uploadDocument = (req, res) => {
   const { LeadID, DocumentName, FileUrl, FileName, Latitude, Longitude, Timestamp } = req.body;
 
   if (!LeadID || !DocumentName) {
-    return res
-      .status(500)
-      .json({ status: false, data: null, message: "lead id can't be blank" });
+    return res.json({ status: false, data: null, message: "lead id can't be blank" });
   }
   const insertUploadDetails = `
       INSERT INTO DocumentList (
@@ -67,9 +65,9 @@ const uploadDocument = (req, res) => {
 
   db.query(insertUploadDetails, (error, results) => {
     if (error) {
-      return res.status(500).json({ status: false, data: null, message: "Internal Server Error" });
+      return res.json({ status: false, data: null, message: "Internal Server Error" });
     } else {
-      return res.status(200).json({ status: true, data: "Successfully Updated!!", message: "Successfully Updated!!" })
+      return res.json({ status: true, data: "Successfully Updated!!", message: "Successfully Updated!!" })
     }
   });
 
