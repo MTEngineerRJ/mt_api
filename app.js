@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use("/apis", apiRoutes);
 
 app.get("/leadDetails/:id", (req, res) => {
-  res.redirect('https://play.google.com/store/apps/details?id=vk.apps.mte&leadDetails=' + req.params.id)
+  res.redirect('https://play.google.com/store/apps/details?id=vk.apps.mte&referrer=' + req.params.id)
 });
 
 app.get('/', (req, res) => {
