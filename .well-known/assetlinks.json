@@ -7,7 +7,8 @@
       "namespace": "android_app",
       "package_name": "vk.apps.mte",
       "sha256_cert_fingerprints": [
-        "5a:92:a9:46:5c:1d:19:2a:20:90:6a:25:8c:31:bc:f0:1b:d1:76:92:b7:96:c0:f7:8c:6e:39:ac:8c:25:3b:46"
+        "5a:92:a9:46:5c:1d:19:2a:20:90:6a:25:8c:31:bc:f0:1b:d1:76:92:b7:96:c0:f7:8c:6e:39:ac:8c:25:3b:46",
+        "E6:BA:70:04:65:98:82:1B:08:17:7A:9F:CB:3A:FC:7E:A2:70:4B:2E:FF:5F:37:6B:B2:F7:CD:47:49:C1:98:9E"
       ]
     }
   },
