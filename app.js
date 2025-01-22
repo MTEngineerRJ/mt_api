@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/privacy_policy',express.static(__dirname+'/privacy_policy.html'));
+app.use('/.well-known/assetlinks.json',express.static(__dirname+'/.well-known/assetlinks.json'));
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
