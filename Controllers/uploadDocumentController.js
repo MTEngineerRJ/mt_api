@@ -11,16 +11,16 @@ const getDocuments = (req, res) => {
     return res.json({ status: false, data: null, message: "invalid lead id" });
   }
 
-  db.query(sql, [LeadId,LeadId], (err, result) => {
+  db.query(sql, [LeadId], (err, result) => {
     if (err) {
       return res.json({ status: false, data: null, message: "Internal Server Error" });
     }
     const groupedResult = {};
     result.forEach(doc => {
-      const { LeadID, DocumentName, FileUrl, FileName, Latitude, Longitude, Timestamp } = doc;
+      const { LeadID, DocumentName, FileUrl, FileName, Latitude, Longitude, Timestamp,Status } = doc;
       if (!groupedResult[DocumentName]) {
         groupedResult[DocumentName] = {
-          LeadID,
+          LeadID,Status,
           DocumentName,
           DocumentList: []
         };
